@@ -41,6 +41,26 @@ For testing the integration of the plugin with Artifactory or Nexus simply use D
 mvn release:prepare release:perform -Dusername=<username> -Dpassword=<password>
 ´´´
 
+You can also provide the credentials via your maven settings.xml. See https://wiki.jenkins-ci.org/display/JENKINS/Hosting+Plugins
+
+´´´
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <servers>
+    <server>
+      <id>maven.jenkins-ci.org</id> <!-- For parent 1.397 or newer; before this use id java.net-m2-repository -->
+      <username>...</username>
+      <password>...</password>
+    </server>
+  </servers>
+
+</settings>
+´´
+ 
+
 ## Developers
 
 * Miel Donkers
