@@ -37,13 +37,13 @@ For testing the integration of the plugin with Artifactory or Nexus simply use D
 
 ## Release the plugin
 
-´´
+```
 mvn release:prepare release:perform -Dusername=<username> -Dpassword=<password>
-´´´
+```
 
 You can also provide the credentials via your maven settings.xml. See https://wiki.jenkins-ci.org/display/JENKINS/Hosting+Plugins
 
-´´´
+```
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
@@ -58,8 +58,7 @@ You can also provide the credentials via your maven settings.xml. See https://wi
   </servers>
 
 </settings>
-´´
- 
+```
 
 ## Developers
 
