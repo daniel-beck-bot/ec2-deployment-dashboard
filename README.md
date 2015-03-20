@@ -35,6 +35,12 @@ For testing the integration of the plugin with Artifactory or Nexus simply use D
 * Nexus **docker run -d -p 8081:8081 --name nexus sonatype/nexus**
  * Open Nexus: [http://localhost:8081](http://localhost:8081)
 
+## Release the plugin
+
+´´
+mvn release:prepare release:perform -Dusername=<username> -Dpassword=<password>
+´´´
+
 ## Developers
 
 * Miel Donkers
