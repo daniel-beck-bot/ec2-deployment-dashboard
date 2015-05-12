@@ -135,6 +135,7 @@ public class EC2Connector implements EnvironmentInterface {
         env.setState(instance.getState());
         env.setLaunchTime(instance.getLaunchTime());
         env.setPublicIpAddress(instance.getPublicIpAddress());
+        env.setPrivateIpAddress(instance.getPrivateIpAddress());
         env.setTags(tags);
         return env;
     }

@@ -8,7 +8,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.amazonaws.services.ec2.model.InstanceState;
 
-import de.codecentric.jenkins.dashboard.DashboardView;
 import de.codecentric.jenkins.dashboard.Messages;
 
 /**
@@ -28,6 +27,7 @@ public class ServerEnvironment {
     private String version;
 
     private String publicIpAddress;
+    private String privateIpAddress;
     private String urlPrefix;
     private String urlPostfix;
 
@@ -120,6 +120,9 @@ public class ServerEnvironment {
     public String getWebAppLink() {
         LOGGER.info("WebAppLink " + state.getName());
         if (state.getName().equalsIgnoreCase("running")) {
+            if( publicIpAddress == null) {
+                return urlPrefix + privateIpAddress + urlPostfix;
+            }
             return urlPrefix + publicIpAddress + urlPostfix;
         }
         return Messages.ServerEnvironment_serverNotRunning();
@@ -150,6 +153,14 @@ public class ServerEnvironment {
 
     public void setUrlPostfix(String urlPostfix) {
         this.urlPostfix = urlPostfix;
+    }
+
+    public String getPrivateIpAddress() {
+        return privateIpAddress;
+    }
+
+    public void setPrivateIpAddress(String privateIpAddress) {
+        this.privateIpAddress = privateIpAddress;
     }
 
     @Override
