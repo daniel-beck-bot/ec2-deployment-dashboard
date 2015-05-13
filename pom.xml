@@ -26,7 +26,7 @@
 	</parent>
 
 	<artifactId>ec2-deployment-dashboard</artifactId>
-	<version>1.0.10-SNAPSHOT</version>
+	<version>1.0.9-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 
 	<name>Deployment Dashboard Plugin for Jenkins</name>
