@@ -71,7 +71,7 @@ public class EC2ConnectorTest {
         assertThat(serverEnv, notNullValue());
         assertThat(serverEnv.getInstanceId(), is("instance"));
         assertThat(serverEnv.getInstanceType(), is(InstanceType.C1Xlarge.toString()));
-        assertThat(serverEnv.getType(), is(ENVIRONMENT_TYPES.TEST));
+        assertThat(serverEnv.getType(), is(ENVIRONMENT_TYPES.DEFAULT));
         assertThat(serverEnv.getEnvironmentTag(), is("unknown"));
         assertThat(serverEnv.getState().getName(), is(InstanceStateName.Running.toString()));
         assertThat(serverEnv.getLaunchTime(), is(launchTime));
@@ -109,7 +109,7 @@ public class EC2ConnectorTest {
         final Instance instance = new Instance().withInstanceId("instance").withInstanceType(InstanceType.C1Xlarge).withTags(new Tag(EC2Connector.DEFAULT_INSTANCE_NAME_TAG, EC2Connector.TEST_VALUE));
         ServerEnvironment serverEnv = Whitebox.<ServerEnvironment> invokeMethod(env, "getEnvironmentFromInstance", instance);
         assertThat(serverEnv, notNullValue());
-        assertThat(serverEnv.getType(), is(ENVIRONMENT_TYPES.TEST));
+        assertThat(serverEnv.getType(), is(ENVIRONMENT_TYPES.DEFAULT));
     }
 
     @Test

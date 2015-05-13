@@ -262,7 +262,9 @@ public class DashboardView extends View {
         for (ServerEnvironment serverEnvironment : foundEnvironments) {
             serverEnvironment.setUrlPrefix(environment.getUrlPrefix());
             serverEnvironment.setUrlPostfix(environment.getUrlPostfix());
-            serverEnvironment.setType(ENVIRONMENT_TYPES.getType(environment.getEnvironmentType()));
+            if( serverEnvironment.getType().equals( ENVIRONMENT_TYPES.DEFAULT ) ) {
+                serverEnvironment.setType(ENVIRONMENT_TYPES.getType(environment.getEnvironmentType()));
+            }
         }
     }
 

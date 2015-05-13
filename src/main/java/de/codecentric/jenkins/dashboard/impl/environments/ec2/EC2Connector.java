@@ -125,6 +125,8 @@ public class EC2Connector implements EnvironmentInterface {
                     env.setType(ENVIRONMENT_TYPES.STAGING);
                 } else if (tag.getValue().contains(JENKINS_VALUE)) {
                     env.setType(ENVIRONMENT_TYPES.JENKINS);
+                } else {
+                    env.setType(ENVIRONMENT_TYPES.DEFAULT);
                 }
             }
             if (tag.getKey().equalsIgnoreCase(VERSION_TAG)) {

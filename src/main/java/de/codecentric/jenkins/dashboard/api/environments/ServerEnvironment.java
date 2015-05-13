@@ -2,7 +2,6 @@ package de.codecentric.jenkins.dashboard.api.environments;
 
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -18,8 +17,6 @@ import de.codecentric.jenkins.dashboard.Messages;
  * 
  */
 public class ServerEnvironment {
-
-    private final static Logger LOGGER = Logger.getLogger(ServerEnvironment.class.getName());
 
     private String instanceId;
     private String environmentTag;
@@ -37,7 +34,7 @@ public class ServerEnvironment {
     private ENVIRONMENT_TYPES type;
 
     public enum ENVIRONMENT_TYPES {
-        TEST, PRODUCTION, STAGING, JENKINS;
+        DEFAULT, TEST, PRODUCTION, STAGING, JENKINS;
 
         public static ENVIRONMENT_TYPES getType(String type) {
             if (type != null) {
@@ -47,7 +44,7 @@ public class ServerEnvironment {
                     }
                 }
             }
-            return TEST;
+            return DEFAULT;
         }
 
     }
@@ -55,7 +52,7 @@ public class ServerEnvironment {
     public ServerEnvironment(String instanceId, String instanceType) {
         this.instanceId = instanceId;
         this.instanceType = instanceType;
-        this.type = ENVIRONMENT_TYPES.TEST;
+        this.type = ENVIRONMENT_TYPES.DEFAULT;
     }
 
     public String getEnvironmentTag() {
@@ -130,7 +127,6 @@ public class ServerEnvironment {
     }
 
     public String getWebAppLink() {
-        LOGGER.info("WebAppLink " + state.getName());
         if (state.getName().equalsIgnoreCase("running")) {
             if (publicIpAddress == null) {
                 return urlPrefix + privateIpAddress + urlPostfix;
