@@ -57,7 +57,7 @@ public class EC2Connector implements EnvironmentInterface {
     public static EC2Connector getEC2Connector(final String credentialsId) {
         final DomainRequirement domain = new DomainRequirement();
         final AwsKeyCredentials credentials = CredentialsMatchers.firstOrNull(CredentialsProvider.lookupCredentials(AwsKeyCredentials.class, Jenkins.getInstance(), null, domain),
-                CredentialsMatchers.withId(credentialsId));
+                        CredentialsMatchers.withId(credentialsId));
         if (credentials == null) {
             LOGGER.warning("No credentials found for ID='" + credentialsId + "'");
             return null;
@@ -119,6 +119,13 @@ public class EC2Connector implements EnvironmentInterface {
             tags.add(envTag);
             if (tag.getKey().equalsIgnoreCase(DEFAULT_INSTANCE_NAME_TAG)) {
                 env.setEnvironmentTag(tag.getValue());
+                if (tag.getValue().contains(PROD_VALUE)) {
+                    env.setType(ENVIRONMENT_TYPES.PRODUCTION);
+                } else if (tag.getValue().contains(STAGING_VALUE)) {
+                    env.setType(ENVIRONMENT_TYPES.STAGING);
+                } else if (tag.getValue().contains(JENKINS_VALUE)) {
+                    env.setType(ENVIRONMENT_TYPES.JENKINS);
+                }
             }
             if (tag.getKey().equalsIgnoreCase(VERSION_TAG)) {
                 env.setVersion(tag.getValue());
