@@ -113,20 +113,12 @@ public class EC2Connector implements EnvironmentInterface {
 
     private ServerEnvironment getEnvironmentFromInstance(Instance instance) {
         ServerEnvironment env = new ServerEnvironment(instance.getInstanceId(), instance.getInstanceType());
-
         List<EnvironmentTag> tags = new ArrayList<EnvironmentTag>();
         for (Tag tag : instance.getTags()) {
             EnvironmentTag envTag = new EnvironmentTag(tag.getKey(), tag.getValue());
             tags.add(envTag);
             if (tag.getKey().equalsIgnoreCase(DEFAULT_INSTANCE_NAME_TAG)) {
                 env.setEnvironmentTag(tag.getValue());
-                if (tag.getValue().contains(PROD_VALUE)) {
-                    env.setType(ENVIRONMENT_TYPES.PRODUCTION);
-                } else if (tag.getValue().contains(STAGING_VALUE)) {
-                    env.setType(ENVIRONMENT_TYPES.STAGING);
-                } else if (tag.getValue().contains(JENKINS_VALUE)) {
-                    env.setType(ENVIRONMENT_TYPES.JENKINS);
-                }
             }
             if (tag.getKey().equalsIgnoreCase(VERSION_TAG)) {
                 env.setVersion(tag.getValue());

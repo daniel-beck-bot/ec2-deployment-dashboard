@@ -40,6 +40,7 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 
 import de.codecentric.jenkins.dashboard.api.environments.ServerEnvironment;
+import de.codecentric.jenkins.dashboard.api.environments.ServerEnvironment.ENVIRONMENT_TYPES;
 import de.codecentric.jenkins.dashboard.api.repositories.Artifact;
 import de.codecentric.jenkins.dashboard.api.repositories.RepositoryInterface;
 import de.codecentric.jenkins.dashboard.impl.environments.ec2.EC2Connector;
@@ -261,6 +262,7 @@ public class DashboardView extends View {
         for (ServerEnvironment serverEnvironment : foundEnvironments) {
             serverEnvironment.setUrlPrefix(environment.getUrlPrefix());
             serverEnvironment.setUrlPostfix(environment.getUrlPostfix());
+            serverEnvironment.setType(ENVIRONMENT_TYPES.getType(environment.getEnvironmentType()));
         }
     }
 

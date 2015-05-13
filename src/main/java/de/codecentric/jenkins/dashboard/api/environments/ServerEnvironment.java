@@ -37,7 +37,19 @@ public class ServerEnvironment {
     private ENVIRONMENT_TYPES type;
 
     public enum ENVIRONMENT_TYPES {
-        TEST, PRODUCTION, STAGING, JENKINS
+        TEST, PRODUCTION, STAGING, JENKINS;
+
+        public static ENVIRONMENT_TYPES getType(String type) {
+            if (type != null) {
+                for (ENVIRONMENT_TYPES t : ENVIRONMENT_TYPES.values()) {
+                    if (type.contains(t.toString())) {
+                        return t;
+                    }
+                }
+            }
+            return TEST;
+        }
+
     }
 
     public ServerEnvironment(String instanceId, String instanceType) {
@@ -120,7 +132,7 @@ public class ServerEnvironment {
     public String getWebAppLink() {
         LOGGER.info("WebAppLink " + state.getName());
         if (state.getName().equalsIgnoreCase("running")) {
-            if( publicIpAddress == null) {
+            if (publicIpAddress == null) {
                 return urlPrefix + privateIpAddress + urlPostfix;
             }
             return urlPrefix + publicIpAddress + urlPostfix;
